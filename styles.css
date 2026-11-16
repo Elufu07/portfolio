@@ -730,17 +730,28 @@ body {
     display: block;
   }
 
- /* MOBİL DİKEY 18x26 ÇENGEL BULMACA DÜZENİ */
+/* MOBİL DİKEY 19x26 ÇENGEL BULMACA DÜZENİ */
   .crossword-grid {
     height: calc(100svh - var(--nav-height));
     min-height: 620px;
-    grid-template-columns: repeat(19, 1fr);
-    grid-template-rows: repeat(26, 1fr);
+    grid-template-columns: repeat(19, minmax(0, 1fr));
+    grid-template-rows: repeat(26, minmax(0, 1fr));
+    /* Safari alt-piksel kaymasını önlemek için ızgara çizgisini tam hücreye oturtur */
     background-size: calc(100% / 19) calc(100% / 26);
+    background-position: top left;
   }
 
-.letter-cell {
+  .word-strip {
+    width: 100%;
+    height: 100%;
+  }
+
+  .letter-cell {
     font-size: 0.72rem;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
   }
 
   /* Fotoğrafın üzerine oturan ilk dokunma katmanı */
@@ -789,7 +800,7 @@ body {
     z-index: 5;
   }
 
-  /* 01. EYLEMLERİ BÜKMEK */
+ /* 01. EYLEMLERİ BÜKMEK (15 Harf - Yatay) */
   .img-eylemler {
     grid-column: 2 / 5;
     grid-row: 17 / 24;
@@ -797,9 +808,11 @@ body {
   .word-eylemler {
     grid-column: 2 / 17;
     grid-row: 16;
+    grid-template-columns: repeat(15, minmax(0, 1fr));
+    grid-template-rows: 1fr;
   }
 
-  /* 02. PARAZİT MEMBRANLAR */
+  /* 02. PARAZİT MEMBRANLAR (9 Harf - Dikey) */
   .img-parazit {
     grid-column: 11 / 18;
     grid-row: 18 / 25;
@@ -807,9 +820,11 @@ body {
   .word-parazit {
     grid-column: 14;
     grid-row: 9 / 18;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(9, minmax(0, 1fr));
   }
 
-  /* 03. DENGE KABUĞU */
+  /* 03. DENGE KABUĞU (11 Harf - Yatay) */
   .img-denge {
     grid-column: 12 / 18;
     grid-row: 3 / 9;
@@ -817,9 +832,11 @@ body {
   .word-denge {
     grid-column: 8 / 19;
     grid-row: 10;
+    grid-template-columns: repeat(11, minmax(0, 1fr));
+    grid-template-rows: 1fr;
   }
 
-  /* 04. DERKENAR */
+  /* 04. DERKENAR (8 Harf - Dikey) */
   .img-derkenar {
     grid-column: 2 / 7;
     grid-row: 6 / 12;
@@ -827,6 +844,8 @@ body {
   .word-derkenar {
     grid-column: 5;
     grid-row: 12 / 20;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(8, minmax(0, 1fr));
   }
 
   .editorial-section {
