@@ -1,5 +1,5 @@
 :root {
-  --bg-paper: #F4F1EA;                   /* Sıcak kağıt zemini */
+  --bg-paper: #e8e1d4;                   /* Sıcak kağıt zemini */
   --ink-red: #B81D24;                    /* Monokrom baskı kırmızısı */
   --grid-faint: rgba(184, 29, 36, 0.16); /* Silik arka plan ızgarası */
   --nav-height: 68px;
@@ -26,6 +26,7 @@ body {
   color: var(--ink-red);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
+
 
 /* =========================================================
    ÜST MENÜ (YAPIŞKAN NAVBAR)
@@ -139,6 +140,17 @@ body {
   background-size: calc(100% / 24) calc(100% / 13);
 }
 
+/* Sadece bulmaca alanının altında kalan kağıt noktalaşması */
+.crossword-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1; /* Fotoğrafların (2) ve harf kutularının (5) altında kalır */
+  opacity: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='speckle'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.72  0 0 0 0 0.11  0 0 0 0 0.14  8 0 0 0 -5.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23speckle)'/%3E%3C/svg%3E");
+}
+
 .project-pair {
   display: contents;
   text-decoration: none;
@@ -150,7 +162,6 @@ body {
   z-index: 5;
 }
 
-/* Başlangıçta harfler gizli, sadece boş bulmaca kutuları görünür */
 .letter-cell {
   display: flex;
   align-items: center;
@@ -161,15 +172,48 @@ body {
   border: 1px solid rgba(184, 29, 36, 0.35);
   text-transform: uppercase;
   user-select: none;
-  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition-delay: 0s;
 }
 
-/* Fotoğrafın üzerine gelindiğinde arka plan zeminle aynı kalır, harfler kırmızı görünür */
-.image-block:hover + .word-strip .letter-cell {
+.image-block:hover + .word-strip .letter-cell,
+.clue-radio:checked + .project-pair .word-strip .letter-cell {
   background-color: var(--bg-paper);
   color: var(--ink-red);
   border-color: var(--ink-red);
 }
+
+/* 0.07s aralıklarla daha yavaş ve akıcı sıralı açılış */
+.image-block:hover + .word-strip .letter-cell:nth-child(1),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(1)  { transition-delay: 0.00s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(2),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(2)  { transition-delay: 0.07s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(3),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(3)  { transition-delay: 0.14s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(4),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(4)  { transition-delay: 0.21s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(5),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(5)  { transition-delay: 0.28s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(6),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(6)  { transition-delay: 0.35s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(7),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(7)  { transition-delay: 0.42s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(8),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(8)  { transition-delay: 0.49s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(9),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(9)  { transition-delay: 0.56s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(10),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(10) { transition-delay: 0.63s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(11),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(11) { transition-delay: 0.70s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(12),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(12) { transition-delay: 0.77s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(13),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(13) { transition-delay: 0.84s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(14),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(14) { transition-delay: 0.91s; }
+.image-block:hover + .word-strip .letter-cell:nth-child(15),
+.clue-radio:checked + .project-pair .letter-cell:nth-child(15) { transition-delay: 0.98s; }
 
 /* =========================================================
    NOKTALAŞMIŞ (HALFTONE / RISOGRAPH) KIRMIZI FOTOĞRAF KUTULARI
